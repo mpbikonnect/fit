@@ -2550,6 +2550,7 @@ type RecordMsg struct {
 	DeviceIndex                   DeviceIndex
 	EnhancedSpeed                 uint32
 	EnhancedAltitude              uint32
+	BatterySoc                    uint8
 }
 
 // NewRecordMsg returns a record FIT message
@@ -2604,6 +2605,7 @@ func NewRecordMsg() *RecordMsg {
 		DeviceIndex:                   0xFF,
 		EnhancedSpeed:                 0xFFFFFFFF,
 		EnhancedAltitude:              0xFFFFFFFF,
+		BatterySoc:                    0xFF,
 	}
 }
 
@@ -2916,6 +2918,17 @@ func (x *RecordMsg) GetEnhancedAltitudeScaled() float64 {
 		return math.NaN()
 	}
 	return float64(x.EnhancedAltitude)/5 - 500
+}
+
+// GetBatterySocScaled returns BatterySoc
+// with scale and any offset applied. NaN is returned if the
+// field has an invalid value (i.e. has not been set).
+// Units: %
+func (x *RecordMsg) GetBatterySocScaled() float64 {
+	if x.BatterySoc == 0xFF {
+		return math.NaN()
+	}
+	return float64(x.BatterySoc) / 2
 }
 
 // GetSpeedFromCompressedSpeedDistance returns
