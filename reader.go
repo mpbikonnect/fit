@@ -10,8 +10,8 @@ import (
 	"sort"
 	"time"
 
-	"github.com/tormoder/fit/dyncrc16"
-	"github.com/tormoder/fit/internal/types"
+	"github.com/mpbikonnect/fit/dyncrc16"
+	"github.com/mpbikonnect/fit/internal/types"
 )
 
 var (
